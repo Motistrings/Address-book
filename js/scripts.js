@@ -1,6 +1,15 @@
 function Contact(first, last) {
   this.firstName = first;
   this.lastName = last;
+  this.address = [];
+  function Address(street, city, county) {
+    this.street = street;
+    this.city = city;
+    this.county = county;
+  }
+  Contact.prototype.fullName = function () {
+    return this.firstName + " " + this.lastName;
+  };
 }
 $(document).ready(function () {
   $("form#new-contact").submit(function (event) {
@@ -9,7 +18,7 @@ $(document).ready(function () {
     var inputedLastName = $("input#new-last-name").val();
     var newContact = new Contact(inputedFirstName, inputedLastName);
     $("ul#contacts").append(
-      "<li><span class='contact'>" + newContact.firstName + "</span></li>"
+      "<li><span class='contact'>" + newContact.fullName() + "</span></li>"
     );
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
